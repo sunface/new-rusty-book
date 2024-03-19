@@ -1,0 +1,24 @@
+[book]
+authors = ["sunface"]
+language = "zh-CN"
+title = "Rusty Book(锈书)"
+src = "src"
+
+[output.html]
+no-section-label = true
+additional-css = ["theme/style1.css"]
+additional-js = ["assets/custom1.js", "assets/bigPicture.js"]
+git-repository-url = "https://github.com/studyrs/rusty-book"
+edit-url-template = "https://github.com/studyrs/rusty-book/edit/main/{path}"
+
+[output.html.playground]
+editable = true
+copy-js = true
+# line-numbers = true
+
+[output.html.fold]
+enable = true
+level = 1
+
+[rust]
+edition = "2021"   #在线运行用2021版本的
