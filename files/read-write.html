@@ -1,0 +1,293 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>文件读写 - Rusty Book(锈书)</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/style1.css">
+
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../about.html">Rusty Book</a></li><li class="chapter-item expanded affix "><li class="part-title">Awesome</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../awesome-daily-dev.html">日常开发常用库</a></li><li class="chapter-item expanded "><a href="../awesome-superstar.html">Rust 明星项目</a></li><li class="chapter-item expanded "><a href="../awesome-empowering-js.html">使用 Rust 增强 JS</a></li><li class="chapter-item expanded "><a href="../awesome-games.html">Rust开发的游戏</a></li><li class="chapter-item expanded "><a href="../awesome-gamedev.html">游戏引擎</a></li><li class="chapter-item expanded affix "><li class="part-title">Awesome + Cookbook</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../algos/awesome.html">实用算法</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><div>数据结构</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../algos/datastructures/bitfield.html">位字段</a></li></ol></li><li class="chapter-item "><a href="../algos/randomness.html">生成随机值</a></li><li class="chapter-item "><a href="../algos/sorting.html">Vec 排序</a></li><li class="chapter-item "><div>压缩算法</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../algos/compression/tar.html">使用.tar包</a></li></ol></li><li class="chapter-item "><div>密码学</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../algos/cryptography/hashing.html">哈希</a></li><li class="chapter-item "><a href="../algos/cryptography/encryption.html">加密</a></li></ol></li><li class="chapter-item "><div>数学计算</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../algos/math/linear-algebra.html">线性代数</a></li><li class="chapter-item "><a href="../algos/math/trigonometry.html">三角函数</a></li><li class="chapter-item "><a href="../algos/math/complex.html">复数</a></li><li class="chapter-item "><a href="../algos/math/statistics.html">统计学</a></li><li class="chapter-item "><a href="../algos/math/misc.html">杂项</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../cmd/awesome.html">命令行</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../cmd/parsing.html">参数解析</a></li><li class="chapter-item "><a href="../cmd/ansi.html">终端输出格式化</a></li></ol></li><li class="chapter-item expanded "><a href="../os/awesome.html">操作系统</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../os/processor.html">处理器</a></li><li class="chapter-item "><a href="../os/command.html">调用系统命令</a></li></ol></li><li class="chapter-item expanded "><div>并发和并行</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../cocurrency/threads.html">多线程</a></li><li class="chapter-item "><a href="../cocurrency/parallel.html">使用rayon并行处理数据</a></li></ol></li><li class="chapter-item expanded "><div>数据库</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../database/sqlite.html">SQLite</a></li><li class="chapter-item "><a href="../database/postgres.html">Postgres</a></li></ol></li><li class="chapter-item expanded "><div>日期和时间</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../datetime/duration.html">时间计算和转换</a></li><li class="chapter-item "><a href="../datetime/parsing.html">解析和显示</a></li></ol></li><li class="chapter-item expanded "><div>开发者工具</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../devtools/log.html">日志</a></li><li class="chapter-item "><a href="../devtools/config-log.html">配置日志</a></li><li class="chapter-item "><a href="../devtools/version.html">版本号</a></li><li class="chapter-item "><a href="../devtools/build-tools.html">构建时工具</a></li></ol></li><li class="chapter-item expanded "><div>编解码</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../encoding/strings.html">字符编码</a></li><li class="chapter-item "><a href="../encoding/csv.html">CSV</a></li><li class="chapter-item "><a href="../encoding/structured.html">结构化数据</a></li></ol></li><li class="chapter-item expanded "><div>错误处理</div></li><li class="chapter-item expanded "><div>文件操作</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../files/read-write.html" class="active">文件读写</a></li><li class="chapter-item "><a href="../files/dir.html">目录访问</a></li></ol></li><li class="chapter-item expanded "><div>内存管理</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../memory/global-vars.html">全局变量</a></li></ol></li><li class="chapter-item expanded "><div>网络协议</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../protocols/tcpip.html">TCP/IP</a></li></ol></li><li class="chapter-item expanded "><div>文本处理</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../text/regex.html">正则表达式</a></li><li class="chapter-item "><a href="../text/string.html">字符串解析</a></li></ol></li><li class="chapter-item expanded "><div>Web编程</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../web/scraping.html">提取网络链接( 爬虫 )</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Rusty Book(锈书)</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/studyrs/rusty-book" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/studyrs/rusty-book/edit/main/src/files/read-write.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <!-- Page table of contents -->
+                    <div class="sidetoc"><nav class="pagetoc"></nav></div>
+                    <main>
+                        <h1 id="文件读写"><a class="header" href="#文件读写">文件读写</a></h1>
+<h2 id="迭代文件中的内容行"><a class="header" href="#迭代文件中的内容行">迭代文件中的内容行</a></h2>
+<pre><pre class="playground"><code class="language-rust editable edition2021">use std::fs::File;
+use std::io::{Write, BufReader, BufRead, Error};
+
+fn main() -&gt; Result&lt;(), Error&gt; {
+    let path = &quot;lines.txt&quot;;
+
+    // 创建文件
+    let mut output = File::create(path)?;
+    // 写入三行内容
+    write!(output, &quot;Rust\n💖\nFun&quot;)?;
+
+    let input = File::open(path)?;
+    let buffered = BufReader::new(input);
+
+    // 迭代文件中的每一行内容，line 是字符串
+    for line in buffered.lines() {
+        println!(&quot;{}&quot;, line?);
+    }
+
+    Ok(())
+}</code></pre></pre>
+<h2 id="避免对同一个文件进行读写"><a class="header" href="#避免对同一个文件进行读写">避免对同一个文件进行读写</a></h2>
+<p><a href="https://docs.rs/same-file/latest/same_file/">same_file</a> 可以帮我们识别两个文件是否是相同的。</p>
+<pre><pre class="playground"><code class="language-rust editable edition2021">use same_file::Handle;
+use std::fs::File;
+use std::io::{BufRead, BufReader, Error, ErrorKind};
+use std::path::Path;
+
+fn main() -&gt; Result&lt;(), Error&gt; {
+    let path_to_read = Path::new(&quot;new.txt&quot;);
+
+    // 从标准输出上获取待写入的文件名
+    let stdout_handle = Handle::stdout()?;
+    // 将待写入的文件名跟待读取的文件名进行比较
+    let handle = Handle::from_path(path_to_read)?;
+
+    if stdout_handle == handle {
+        return Err(Error::new(
+            ErrorKind::Other,
+            &quot;You are reading and writing to the same file&quot;,
+        ));
+    } else {
+        let file = File::open(&amp;path_to_read)?;
+        let file = BufReader::new(file);
+        for (num, line) in file.lines().enumerate() {
+            println!(&quot;{} : {}&quot;, num, line?.to_uppercase());
+        }
+    }
+
+    Ok(())
+}</code></pre></pre>
+<p>以下代码会报错，因为待写入的文件名也是 <em>new.txt</em>，跟待读取的文件名相同</p>
+<pre><code class="language-shell">cargo run &gt;&gt; ./new.txt
+</code></pre>
+<h3 id="使用内存映射访问文件"><a class="header" href="#使用内存映射访问文件">使用内存映射访问文件</a></h3>
+<p><a href="https://docs.rs/memmap/">memmap</a> 能创建一个文件的内存映射( memory map )，然后模拟一些非顺序读。</p>
+<p>使用内存映射，意味着你将相关的索引加载到内存中，而不是通过 <a href="https://doc.rust-lang.org/std/fs/struct.File.html#method.seek">seek</a> 的方式去访问文件。</p>
+<p><a href="https://docs.rs/memmap/*/memmap/struct.Mmap.html#method.map">Mmap::map</a> 函数会假定待映射的文件不会同时被其它进程修改。</p>
+<pre><pre class="playground"><code class="language-rust editable edition2021">use memmap::Mmap;
+use std::fs::File;
+use std::io::{Write, Error};
+
+fn main() -&gt; Result&lt;(), Error&gt; {
+    write!(File::create(&quot;content.txt&quot;)?, &quot;My hovercraft is full of eels!&quot;)?;
+
+    let file = File::open(&quot;content.txt&quot;)?;
+    let map = unsafe { Mmap::map(&amp;file)? };
+
+    let random_indexes = [0, 1, 2, 19, 22, 10, 11, 29];
+    assert_eq!(&amp;map[3..13], b&quot;hovercraft&quot;);
+    let random_bytes: Vec&lt;u8&gt; = random_indexes.iter()
+        .map(|&amp;idx| map[idx])
+        .collect();
+    assert_eq!(&amp;random_bytes[..], b&quot;My loaf!&quot;);
+    Ok(())
+}</code></pre></pre>
+
+                        <div id="giscus-container"></div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../encoding/structured.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../files/dir.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../encoding/structured.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../files/dir.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript" charset="utf-8">
+        var pagePath = "files/read-write.md"
+        </script>
+
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="../assets/custom1.js"></script>
+        <script type="text/javascript" src="../assets/bigPicture.js"></script>
+
+
+    </body>
+</html>
